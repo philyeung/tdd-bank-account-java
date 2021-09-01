@@ -15,4 +15,9 @@ public class Account {
     public int getBalance() {
         return balance;
     }
+
+    public boolean withdraw(int amount) {
+        this.balance -= amount;
+        return true;
+    }
 }

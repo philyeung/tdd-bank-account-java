@@ -34,4 +34,12 @@ public class AccountTest {
         Account account = new Account();
         assertThat(account.deposit(-5)).isEqualTo(false);
     }
+
+    @Test
+    public void canWithdrawAmount() {
+        Account account = new Account();
+        account.deposit(10);
+        account.withdraw(5);
+        assertThat(account.getBalance()).isEqualTo(5);
+    }
 }
