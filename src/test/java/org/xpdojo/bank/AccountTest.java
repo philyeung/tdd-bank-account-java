@@ -28,4 +28,10 @@ public class AccountTest {
         account.deposit(10);
         assertThat(account.getBalance()).isEqualTo(15);
     }
+
+    @Test
+    public void cannotDepositNegativeAmount() {
+        Account account = new Account();
+        assertThat(account.deposit(-5)).isEqualTo(false);
+    }
 }
