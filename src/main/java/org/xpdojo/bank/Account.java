@@ -4,6 +4,10 @@ public class Account {
 
     private int balance;
 
+    public int getBalance() {
+        return balance;
+    }
+
     public boolean deposit(int amount) {
         if (amount < 0) {
            return false;
@@ -12,12 +16,16 @@ public class Account {
         return true;
     }
 
-    public int getBalance() {
-        return balance;
-    }
-
     public boolean withdraw(int amount) {
+        if (withdrawalMakesBalanceNegative(amount)) {
+            return false;
+        }
+
         this.balance -= amount;
         return true;
+    }
+
+    private boolean withdrawalMakesBalanceNegative(int amount) {
+        return balance - amount < 0;
     }
 }

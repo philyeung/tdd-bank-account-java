@@ -42,4 +42,14 @@ public class AccountTest {
         account.withdraw(5);
         assertThat(account.getBalance()).isEqualTo(5);
     }
+
+    @Test
+    public void cannotWithdrawMoreThanAvailableFunds() {
+        Account account = new Account();
+        account.deposit(15);
+        account.withdraw(20);
+        assertThat(account.withdraw(20)).isEqualTo(false);
+        assertThat(account.getBalance()).isEqualTo(15);
+    }
+
 }
