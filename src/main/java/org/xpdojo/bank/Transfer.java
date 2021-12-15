@@ -2,7 +2,7 @@ package org.xpdojo.bank;
 
 public class Transfer {
 
-    private int amount;
+    private Money amount;
     private Account source;
 
     private Transfer(Account source) {
@@ -14,7 +14,7 @@ public class Transfer {
     }
 
     // bah....a setter...
-    public Transfer anAmountOf(int amount) {
+    public Transfer anAmountOf(Money amount) {
         this.amount = amount;
         return this;
     }

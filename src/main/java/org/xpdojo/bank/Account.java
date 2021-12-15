@@ -1,15 +1,17 @@
 package org.xpdojo.bank;
 
+import static org.xpdojo.bank.Money.*;
 import static org.xpdojo.bank.Transfer.*;
 
 public class Account {
 
-    private int balance;
+    private Money balance;
 
     private Account() {
+        this.balance = amountOf(0);
     }
 
-    private Account(int balance) {
+    private Account(Money balance) {
         this.balance = balance;
     }
 
@@ -17,33 +19,33 @@ public class Account {
         return new Account();
     }
 
-    public static Account accountWithBalanceOf(int balance) {
+    public static Account accountWithBalanceOf(Money balance) {
         return new Account(balance);
     }
 
-    public int balance() {
+    public Money balance() {
         return balance;
     }
 
-    public void deposit(int amount) {
-        if (amount < 0) {
-            throw new IllegalStateException("Cannot deposit negative amount");
-        }
-        this.balance += amount;
+    public void deposit(Money amount) {
+        this.balance = this.balance.add(amount);
     }
 
-    public void withdraw(int amount) {
+    public void withdraw(Money amount) {
         if (withdrawalMakesBalanceNegative(amount)) {
             throw new IllegalStateException("Insufficient Funds");
         }
-        this.balance -= amount;
+
+        this.balance = this.balance.minus(amount);
     }
 
-    private boolean withdrawalMakesBalanceNegative(int amount) {
-        return balance - amount < 0;
+    private boolean withdrawalMakesBalanceNegative(Money amount) {
+
+        // Need less than logic in Money class
+        return false;
     }
 
-    public Transfer send(int amount) {
+    public Transfer send(Money amount) {
         var transfer = transferFrom(this);
         transfer.anAmountOf(amount);
         return transfer;

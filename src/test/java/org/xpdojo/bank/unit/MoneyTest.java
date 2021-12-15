@@ -19,4 +19,24 @@ public class MoneyTest {
 
         assertEquals(money, amountOf(15));
     }
+
+    @Test
+    public void canAddMoneys() {
+        var money = amountOf(10);
+        var moreMoneys = amountOf(20);
+
+        var allMyMoneys = money.add(moreMoneys);
+
+        assertEquals(allMyMoneys, amountOf(30));
+    }
+
+    @Test
+    public void canTakePreciousMoneysAway() {
+       var money = amountOf(100);
+       var moreMoneys = amountOf(50);
+
+       var allMyMoneys = money.minus(moreMoneys);
+
+       assertEquals(allMyMoneys,amountOf(50));
+    }
 }
