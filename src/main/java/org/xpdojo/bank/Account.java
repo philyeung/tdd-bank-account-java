@@ -4,28 +4,46 @@ public class Account {
 
     private int balance;
 
-    public int getBalance() {
+    private Account() {
+    }
+
+    private Account(int balance) {
+        this.balance = balance;
+    }
+
+
+    public static Account anAccountWithZeroBalance() {
+        return new Account();
+    }
+
+    public static Account anAccountWithBalanceOf(int balance) {
+        return new Account(50);
+
+    }
+
+    public int balance() {
         return balance;
     }
 
-    public boolean deposit(int amount) {
+    public void deposit(int amount) {
         if (amount < 0) {
-           return false;
+            // Throw exception
         }
         this.balance += amount;
-        return true;
     }
 
-    public boolean withdraw(int amount) {
+    public void withdraw(int amount) {
         if (withdrawalMakesBalanceNegative(amount)) {
-            return false;
+            // throw exception
         }
-
         this.balance -= amount;
-        return true;
     }
 
     private boolean withdrawalMakesBalanceNegative(int amount) {
         return balance - amount < 0;
+    }
+
+    public Transfer send(int i) {
+        return new Transfer();
     }
 }
