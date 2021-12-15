@@ -1,19 +1,18 @@
 package org.xpdojo.bank.acceptance;
 
 import org.junit.jupiter.api.Test;
-import org.xpdojo.bank.Account;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.xpdojo.bank.Account.anAccountWithBalanceOf;
-import static org.xpdojo.bank.Account.anAccountWithZeroBalance;
+import static org.xpdojo.bank.Account.accountWithBalanceOf;
+import static org.xpdojo.bank.Account.accountWithZeroBalance;
 
-public class WithDrawTest {
+public class WithdrawScenarios {
 
     @Test
     public void canWithDrawFromAnAccount() {
-        var account = anAccountWithBalanceOf(50);
+        var account = accountWithBalanceOf(50);
         account.withdraw(20);
 
         assertThat(account.balance(), is(30));
@@ -21,7 +20,7 @@ public class WithDrawTest {
 
     @Test
     public void withdrawingMoreThanAvailableBalanceThrowsException() {
-        var account = anAccountWithZeroBalance();
+        var account = accountWithZeroBalance();
 
         Exception e = assertThrows(IllegalStateException.class, () -> account.withdraw(10));
 
