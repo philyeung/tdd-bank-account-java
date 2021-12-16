@@ -44,7 +44,7 @@ public class Money {
 
     @Override
     public String toString() {
-        return "Money = " + amount;
+        return "Money: " + amount;
     }
 
 }

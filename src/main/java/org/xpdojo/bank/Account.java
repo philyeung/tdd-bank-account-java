@@ -1,5 +1,8 @@
 package org.xpdojo.bank;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import static org.xpdojo.bank.ErrorMessages.*;
 import static org.xpdojo.bank.Money.*;
 import static org.xpdojo.bank.Transfer.*;
@@ -36,7 +39,7 @@ public class Account {
     }
 
     public void withdraw(Money amount) {
-        if (withdrawalMakesBalanceNegative(amount)) {
+        if (balanceBecomesNegativeAfterSubtracting(amount)) {
             throw new IllegalStateException(INSUFFICIENT_FUNDS);
         }
 
@@ -44,15 +47,32 @@ public class Account {
     }
 
     public Transfer send(Money amount) {
-        if (withdrawalMakesBalanceNegative(amount)) {
+        if (balanceBecomesNegativeAfterSubtracting(amount)) {
             throw new IllegalStateException(INSUFFICIENT_FUNDS);
         }
+
         var transfer = transferFrom(this);
         transfer.anAmountOf(amount);
+
         return transfer;
     }
 
-    private boolean withdrawalMakesBalanceNegative(Money amount) {
+    public String printBalanceSlip() {
+        return String.format("Date: %s, Time: %s, Balance:%s",
+                LocalDate.now(),
+                LocalDateTime.now(),
+                this.balance.toString().split(":")[1]);
+    }
+
+    private boolean balanceBecomesNegativeAfterSubtracting(Money amount) {
         return this.balance.minus(amount).isLessThan(valueOf(0));
     }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "balance=" + balance +
+                '}';
+    }
+
 }
