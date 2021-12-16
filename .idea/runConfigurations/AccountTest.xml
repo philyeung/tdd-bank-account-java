@@ -3,12 +3,12 @@
     <module name="tdd-bank-account-java.test" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="org.xpdojo.bank.unit.*" />
+        <option name="PATTERN" value="unit.org.xpdojo.bank.unit.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>
-    <option name="PACKAGE_NAME" value="org.xpdojo.bank.unit" />
-    <option name="MAIN_CLASS_NAME" value="org.xpdojo.bank.unit.AccountTest" />
+    <option name="PACKAGE_NAME" value="unit.org.xpdojo.bank.unit" />
+    <option name="MAIN_CLASS_NAME" value="unit.org.xpdojo.bank.unit.AccountTest" />
     <option name="METHOD_NAME" value="" />
     <option name="TEST_OBJECT" value="class" />
     <option name="PARAMETERS" value="" />

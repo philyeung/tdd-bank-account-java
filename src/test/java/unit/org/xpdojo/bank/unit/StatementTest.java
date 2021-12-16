@@ -1,4 +1,4 @@
-package org.xpdojo.bank.unit;
+package unit.org.xpdojo.bank.unit;
 
 import org.junit.jupiter.api.Test;
 import org.xpdojo.bank.Money;

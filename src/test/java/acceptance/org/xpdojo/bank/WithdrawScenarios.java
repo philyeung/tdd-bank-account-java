@@ -1,4 +1,4 @@
-package org.xpdojo.bank.acceptance;
+package acceptance.org.xpdojo.bank;
 
 import org.junit.jupiter.api.Test;
 import org.xpdojo.bank.Money;
