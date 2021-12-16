@@ -11,12 +11,12 @@ import static org.xpdojo.bank.Transfer.transferFrom;
 public class TransferTest {
 
     @Test
-    public void canTransferFromSenderToReceiver() {
+    public void canTransferMoneyBetweenAccounts() {
         var source = accountWithStartingBalanceAt(Money.valueOf(50));
         var destination = accountWithZeroBalance();
-        var twentyPounds = Money.valueOf(20) ;
+        var twentyShillings = Money.valueOf(20) ;
 
-        transferFrom(source).anAmountOf(twentyPounds).to(destination);
+        transferFrom(source).anAmountOf(twentyShillings).to(destination);
 
         assertThat(source.balance(), is(Money.valueOf(30)));
         assertThat(destination.balance(), is(Money.valueOf(20)));
