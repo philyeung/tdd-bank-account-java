@@ -6,16 +6,15 @@ import org.xpdojo.bank.Money;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.xpdojo.bank.Account.accountWithZeroBalance;
-import static org.xpdojo.bank.Money.*;
 
 public class DepositScenarios {
 
     @Test
     public void canDepositMoneyToAnAccount() {
         var account = accountWithZeroBalance();
-        account.deposit(amountOf(10));
+        account.deposit(Money.valueOf(10));
 
-        assertThat(account.balance(), is(amountOf(10)));
+        assertThat(account.balance(), is(Money.valueOf(10)));
 
     }
 }

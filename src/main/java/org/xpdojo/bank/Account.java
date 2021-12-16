@@ -9,7 +9,7 @@ public class Account {
     private Money balance;
 
     private Account() {
-        this.balance = amountOf(0);
+        this.balance = valueOf(0);
     }
 
     private Account(Money balance) {
@@ -20,7 +20,7 @@ public class Account {
         return new Account();
     }
 
-    public static Account accountWithBalanceOf(Money balance) {
+    public static Account accountWithStartingBalanceOf(Money balance) {
         return new Account(balance);
     }
 
@@ -29,7 +29,7 @@ public class Account {
     }
 
     public void deposit(Money amount) {
-        if (amount.isLessThan(amountOf(0))) {
+        if (amount.isLessThan(valueOf(0))) {
             throw new IllegalStateException(CANNOT_DEPOSIT_NEGATIVE_AMOUNT);
         }
         this.balance = this.balance.add(amount);
@@ -53,6 +53,6 @@ public class Account {
     }
 
     private boolean withdrawalMakesBalanceNegative(Money amount) {
-        return this.balance.minus(amount).isLessThan(amountOf(0));
+        return this.balance.minus(amount).isLessThan(valueOf(0));
     }
 }

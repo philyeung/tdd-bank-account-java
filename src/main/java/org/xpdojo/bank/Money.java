@@ -6,13 +6,10 @@ public class Money {
     private final double amount;
 
     private Money(double amount) {
-//        if (amount < 0) {
-//            throw new IllegalStateException("Operation results in a negative amount of money");
-//        }
         this.amount = amount;
     }
 
-    public static Money amountOf(double amount) {
+    public static Money valueOf(double amount) {
         return new Money(amount);
     }
 
@@ -47,7 +44,7 @@ public class Money {
 
     @Override
     public String toString() {
-        return "Money = : " + amount;
+        return "Money = " + amount;
     }
 
 }
