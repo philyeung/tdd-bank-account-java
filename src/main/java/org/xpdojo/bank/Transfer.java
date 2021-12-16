@@ -2,8 +2,8 @@ package org.xpdojo.bank;
 
 public class Transfer {
 
+    private final Account source;
     private Money amount;
-    private Account source;
 
     private Transfer(Account source) {
         this.source = source;

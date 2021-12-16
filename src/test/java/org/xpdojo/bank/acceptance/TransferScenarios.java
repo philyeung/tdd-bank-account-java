@@ -1,12 +1,12 @@
 package org.xpdojo.bank.acceptance;
 
 import org.junit.jupiter.api.Test;
-import org.xpdojo.bank.Money;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.xpdojo.bank.Account.accountWithBalanceOf;
+import static org.xpdojo.bank.ErrorMessages.INSUFFICIENT_FUNDS;
 import static org.xpdojo.bank.Money.*;
 
 public class TransferScenarios {
@@ -29,7 +29,7 @@ public class TransferScenarios {
 
         Exception ex = assertThrows(IllegalStateException.class, () -> source.send(amountOf(60)).to(destination));
 
-        assertThat(ex.getMessage(), is("Insufficient Funds"));
+        assertThat(ex.getMessage(), is(INSUFFICIENT_FUNDS));
 
     }
 
