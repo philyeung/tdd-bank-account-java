@@ -1,11 +1,9 @@
-package acceptance.org.xpdojo.bank;
+package org.xpdojo.bank;
 
-import org.junit.jupiter.api.Test;
-import org.xpdojo.bank.Money;
-import org.xpdojo.bank.Statement;
+import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.CoreMatchers.is;
 import static org.xpdojo.bank.Account.accountWithStartingBalanceAt;
 import static org.xpdojo.bank.Account.accountWithZeroBalance;
 import static org.xpdojo.bank.Statement.*;

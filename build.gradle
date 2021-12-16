@@ -1,53 +1,55 @@
-defaultTasks 'clean', 'build', 'jacocoTestReport'
+defaultTasks 'clean', 'build'
+
+apply plugin: 'java'
+
+wrapper {
+    gradleVersion = "4.8.1"
+}
 
 repositories {
-    jcenter()
     mavenCentral()
 }
 
-apply plugin: 'java'
-apply plugin: 'jacoco'
-
-dependencies {
-    testCompile 'org.concordion:concordion:3.1.2'
-
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.2',
-            'org.assertj:assertj-core:3.16.1',
-            'org.jmock:jmock-junit5:2.11.0',
-            'org.mockito:mockito-core:3.3.3'
-
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.2'
+sourceSets {
+    test {
+        java.srcDirs = ['src/test/unit/java']
+        resources.srcDirs = ['src/test/unit/resources']
+    }
+    acceptanceTest {
+        java.srcDirs = ['src/test/acceptance/java']
+        resources.srcDirs = ['src/test/acceptance/resources']
+        compileClasspath += main.output + test.output
+        runtimeClasspath += main.output + test.output
+    }
 }
 
-ext {
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
+configurations {
+    acceptanceTest.extendsFrom testCompile
+    acceptanceTest.extendsFrom testRuntime
+}
+
+dependencies {
+    testCompile 'org.junit.jupiter:junit-jupiter:5.4.0'
+    testCompile 'org.hamcrest:hamcrest-core:2.1'
+    acceptanceTestCompile 'org.concordion:concordion:3.1.2'
 }
 
 test {
+    systemProperty "user.country", "EN"
+    systemProperty "user.language", "en"
+    outputs.upToDateWhen { false }
     useJUnitPlatform()
-
-    finalizedBy jacocoTestReport
-
-    testLogging {
-        afterSuite { desc, result ->
-            if (!desc.parent) {
-                new File(buildDir, "test-results.json").text =
-                    "{ " +
-                        "\"result\": \"${result.resultType}\", " +
-                        "\"tests\": ${result.testCount}, " +
-                        "\"passed\": ${result.successfulTestCount}, " +
-                        "\"failed\": ${result.failedTestCount}, " +
-                        "\"skipped\": ${result.skippedTestCount} " +
-                    "}"
-            }
-        }
-    }
 }
 
-jacocoTestReport {
-    reports {
-        xml.enabled true
-        csv.enabled true
-    }
+task acceptanceTest(type: Test) {
+    group = LifecycleBasePlugin.VERIFICATION_GROUP
+    description = 'Runs the acceptance tests.'
+    testClassesDirs = sourceSets.acceptanceTest.output.classesDirs
+    classpath = sourceSets.acceptanceTest.runtimeClasspath
+    outputs.upToDateWhen { false }
+    systemProperties['concordion.output.dir'] = "$reporting.baseDir/spec"
+    testLogging.showStandardStreams = true
 }
+
+check.dependsOn acceptanceTest
+acceptanceTest.mustRunAfter test
