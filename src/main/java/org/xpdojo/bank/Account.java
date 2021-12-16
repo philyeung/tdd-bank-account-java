@@ -28,6 +28,9 @@ public class Account {
     }
 
     public void deposit(Money amount) {
+        if (amount.isLessThan(amountOf(0))) {
+            throw new IllegalStateException("Cannot deposit a negative amount");
+        }
         this.balance = this.balance.add(amount);
     }
 
@@ -40,12 +43,13 @@ public class Account {
     }
 
     private boolean withdrawalMakesBalanceNegative(Money amount) {
-
-        // Need less than logic in Money class
-        return false;
+        return this.balance.minus(amount).isLessThan(amountOf(0));
     }
 
     public Transfer send(Money amount) {
+        if (withdrawalMakesBalanceNegative(amount)) {
+            throw new IllegalStateException("Insufficient Funds");
+        }
         var transfer = transferFrom(this);
         transfer.anAmountOf(amount);
         return transfer;

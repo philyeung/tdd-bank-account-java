@@ -39,4 +39,15 @@ public class MoneyTest {
 
        assertEquals(allMyMoneys,amountOf(50));
     }
+
+    @Test
+    public void canCompareMoney() {
+        var smallerAmount = amountOf(1);
+        var largerAmount = amountOf(10);
+        var equalLargerAmount = amountOf(10);
+
+        assertEquals(smallerAmount.isLessThan(largerAmount), true);
+        assertEquals(largerAmount.isMoreThan(smallerAmount), true);
+        assertEquals(largerAmount.equals(largerAmount), true);
+    }
 }

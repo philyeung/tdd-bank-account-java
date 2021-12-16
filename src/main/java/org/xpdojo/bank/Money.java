@@ -6,9 +6,9 @@ public class Money {
     private final double amount;
 
     private Money(double amount) {
-        if (amount < 0) {
-            throw new IllegalStateException("Cannot have negative moneys");
-        }
+//        if (amount < 0) {
+//            throw new IllegalStateException("Operation results in a negative amount of money");
+//        }
         this.amount = amount;
     }
 
@@ -22,6 +22,14 @@ public class Money {
 
     public Money minus(Money money) {
         return new Money(amount - money.amount);
+    }
+
+    public boolean isLessThan(Money other) {
+        return this.amount < other.amount;
+    }
+
+    public boolean isMoreThan(Money other) {
+        return this.amount > other.amount;
     }
 
     @Override
@@ -41,4 +49,5 @@ public class Money {
     public String toString() {
         return "Money = : " + amount;
     }
+
 }
