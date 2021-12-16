@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class MoneyTest {
 
     @Test
-    public void canMakeTheMoneys() {
+    public void canMakeMoneyMoneyMakeMoneyMoney() {
         var money = Money.valueOf(15);
 
         assertEquals(money, Money.valueOf(15));
@@ -43,6 +43,6 @@ public class MoneyTest {
 
         assertTrue(smallerAmount.isLessThan(largerAmount));
         assertTrue(largerAmount.isMoreThan(smallerAmount));
-        assertEquals(equalLargerAmount, largerAmount);
+        assertEquals(largerAmount, equalLargerAmount);
     }
 }

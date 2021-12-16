@@ -20,7 +20,7 @@ public class Account {
         return new Account();
     }
 
-    public static Account accountWithStartingBalanceOf(Money balance) {
+    public static Account accountWithStartingBalanceAt(Money balance) {
         return new Account(balance);
     }
 

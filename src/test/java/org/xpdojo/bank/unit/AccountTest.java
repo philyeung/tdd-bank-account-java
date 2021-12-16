@@ -18,7 +18,7 @@ public class AccountTest {
 
     @Test
     public void anAccountCanBeOpenedWithANonZeroBalance() {
-        var account = accountWithStartingBalanceOf(Money.valueOf(50));
+        var account = accountWithStartingBalanceAt(Money.valueOf(50));
         assertThat(account.balance(), is(Money.valueOf(50)));
     }
 
@@ -48,14 +48,14 @@ public class AccountTest {
 
     @Test
     public void canWithdrawAmount() {
-        var account = accountWithStartingBalanceOf(Money.valueOf(10));
+        var account = accountWithStartingBalanceAt(Money.valueOf(10));
         account.withdraw(Money.valueOf(5));
         assertThat(account.balance(), is(Money.valueOf(5)));
     }
 
     @Test
     public void cannotWithdrawMoreThanAvailableFunds() {
-        var account = accountWithStartingBalanceOf(Money.valueOf(15));
+        var account = accountWithStartingBalanceAt(Money.valueOf(15));
 
         assertThrows(IllegalStateException.class, () -> account.withdraw(Money.valueOf(20)));
         assertThat(account.balance(), is(Money.valueOf(15)));

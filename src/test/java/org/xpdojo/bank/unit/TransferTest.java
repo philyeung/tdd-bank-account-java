@@ -12,7 +12,7 @@ public class TransferTest {
 
     @Test
     public void canTransferFromSenderToReceiver() {
-        var source = accountWithStartingBalanceOf(Money.valueOf(50));
+        var source = accountWithStartingBalanceAt(Money.valueOf(50));
         var destination = accountWithZeroBalance();
         var twentyPounds = Money.valueOf(20) ;
 
